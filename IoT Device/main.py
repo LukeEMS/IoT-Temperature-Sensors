@@ -12,9 +12,7 @@ wifi.connect_wifi(config_settings["ssid"],config_settings["ssid_password"])
  
 sensor, rom = s.find_sensors(0,0)
  
-mqtt_client = mqtt.create_client()
-
-mqtt_client.loop_start()
+mqtt_client = mqtt.create_client(1,config_settings["mqtt_broker"])
 
 while True: # Run forever
  
@@ -23,4 +21,3 @@ while True: # Run forever
     
     time.sleep(1)
     
-mqtt_client.loop_stop()
