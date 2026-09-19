@@ -12,12 +12,16 @@ wifi.connect_wifi(config_settings["ssid"],config_settings["ssid_password"])
  
 sensor, rom = s.find_sensors(0,0)
  
-mqtt_client = mqtt.create_client(1,config_settings["mqtt_broker"])
+mqtt_client = mqtt.create_client("1",
+                                 config_settings["mqtt_broker"],
+                                 int(config_settings["mqtt_port"]))
+
 
 while True: # Run forever
- 
-    print(f"Temp: {s.get_temperature_value(sensor, rom)}")
-    mqtt_client.publish("room1/air/temperature",s.get_temperature_value(sensor, rom))
+    mqtt_client.connect()
+    temperature = s.get_temperature_value(sensor, rom)
+    print(f"Temp: {temperature}")
+    mqtt_client.publish("room1/air/temperature",str(temperature))
     
     time.sleep(1)
     

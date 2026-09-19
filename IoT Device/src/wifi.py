@@ -14,5 +14,5 @@ def connect_wifi(ssid, password):
             time.sleep(1)
             
     print('Network configuration:', wlan.ifconfig())
-    print('Connection successful!')
+    print('Successfully connected to WIFI')
     
